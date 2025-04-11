@@ -3,6 +3,18 @@
     "scheme": "acme",
     "userInterfaceStyle": "automatic",
     "orientation": "default",
+    "ios": {
+      "package": "com.mwd.wallyai",
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.mwd.wallyai",
+      "permissions": [
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ]
+    },
     "web": {
       "output": "static"
     },
