@@ -94,3 +94,19 @@ export const getCurrentUser = async () => {
   }
   return null;
 };
+
+export const getAllPosts = async () => {
+  try {
+    const posts = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.videosCollectionId,
+      [Query.orderDesc("$createdAt")]
+    );
+
+    return posts.documents;
+  } catch (error) {
+    console.log("Error getting all posts:", error);
+    throw new Error("Error getting all posts:", error);
+  }
+  return null;
+};

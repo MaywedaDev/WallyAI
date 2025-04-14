@@ -5,10 +5,15 @@ import { images } from "@/constants";
 import SearchInput from "@/components/SearchInput";
 import Trending from "@/components/Trending";
 import EmptyState from "@/components/EmptyState";
+import useAppwrite from "lib/useAppwrite";
+import { getAllPosts } from "lib/appwrite";
+import VideoCard from "@/components/VideoCard";
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = React.useState<string>("");
   const [refreshing, setRefreshing] = React.useState(false);
+
+  const { data, loading, error, refresh } = useAppwrite(getAllPosts);
 
   const onRefresh = () => {
     setRefreshing(true);
@@ -18,11 +23,9 @@ export default function Home() {
     <SafeAreaView className="bg-primary flex-1">
       <FlatList
         // data={[{ id: 1 }, { id: 2 }, { id: 3 }]}
-        data={[]}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <Text className="text-3xl text-white">{item.id}</Text>
-        )}
+        data={data}
+        keyExtractor={(item) => item.$id.toString()}
+        renderItem={({ item }) => <VideoCard video={item} />}
         ListHeaderComponent={() => (
           <View className="my-6 px-4 space-y-6">
             <View className="justify-between items-start flex-row mb-6">
