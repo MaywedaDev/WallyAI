@@ -110,3 +110,19 @@ export const getAllPosts = async () => {
   }
   return null;
 };
+
+export const getLatestPosts = async () => {
+  try {
+    const posts = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.videosCollectionId,
+      [Query.orderDesc("$createdAt"), Query.limit(5)]
+    );
+
+    return posts.documents;
+  } catch (error) {
+    console.log("Error getting latest posts:", error);
+    throw new Error("Error getting latest posts:", error);
+  }
+  return null;
+};
