@@ -6,9 +6,11 @@ import { images } from "@/constants";
 import FormField from "@/components/FormField";
 import CustomButton from "@/components/CustomButton";
 import { Link, router } from "expo-router";
-import { signIn } from "lib/appwrite";
+import { getCurrentUser, signIn } from "lib/appwrite";
+import { useGlobalContext } from "context/GlobalProvider";
 
 export default function SignIn() {
+  const { setUser, setIsLoggedIn } = useGlobalContext();
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -26,8 +28,17 @@ export default function SignIn() {
     setError(null);
 
     try {
-      const result = await signIn(form.email, form.password);
-      router.replace("/home");
+      await signIn(form.email, form.password);
+
+      const result = await getCurrentUser();
+
+      if (result) {
+        setUser(result);
+        setIsLoggedIn(true);
+        router.replace("/home");
+      } else {
+        throw new Error("Something went wrong");
+      }
     } catch (err) {
       console.log(err);
       setError("Something went wrong, please try again later");

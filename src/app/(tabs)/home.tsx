@@ -11,7 +11,6 @@ import VideoCard from "@/components/VideoCard";
 import VideoScreen from "@/components/VideoExample";
 
 export default function Home() {
-  const [searchQuery, setSearchQuery] = React.useState<string>("");
   const [refreshing, setRefreshing] = React.useState(false);
 
   const { data: posts, loading, error, refresh } = useAppwrite(getAllPosts);
@@ -48,11 +47,7 @@ export default function Home() {
                 />
               </View>
             </View>
-            <SearchInput
-              value={searchQuery}
-              handleChangeText={setSearchQuery}
-              placeholder="Search for a video topic"
-            />
+            <SearchInput placeholder="Search for a video topic" />
 
             <View className="w-full flex-1 mt-12 pb-8">
               <Text className="text-gray-100 font-pregular text-lg mb-3">

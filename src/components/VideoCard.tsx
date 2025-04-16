@@ -1,6 +1,8 @@
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import { icons } from "@/constants";
+import { useVideoPlayer, VideoView } from "expo-video";
+import { useEvent } from "expo";
 
 type VideoCardProps = {
   video: {
@@ -17,11 +19,18 @@ type VideoCardProps = {
 
 export default function VideoCard({ video }: VideoCardProps) {
   const [play, setPlay] = React.useState(false);
+  const player = useVideoPlayer({ uri: video.video }, (player) =>
+    player.pause()
+  );
+  const { isPlaying } = useEvent(player, "playingChange", {
+    isPlaying: player.playing,
+  });
+
   return (
     <View className="flex-col items-center px-4 mb-14">
       <View className="flex-row gap-3 items-start">
         <View className="justify-center items-center flex-row flex-1">
-          <View className="w-[46px] h-[46px] rounded-lg border border-secondary justify-center items-center p-0.5">
+          <View className="w-[46px] h-[46px] rounded-xl border border-secondary justify-center items-center p-0.5">
             <Image
               source={{ uri: video.creator.avatar }}
               className="w-full h-full rounded-lg"
@@ -51,8 +60,8 @@ export default function VideoCard({ video }: VideoCardProps) {
           </View>
         </View>
       </View>
-      {play ? (
-        <Text className="text-white">Playing</Text>
+      {isPlaying ? (
+        <VideoView style={{ width: "100%", height: 300 }} player={player} />
       ) : (
         <TouchableOpacity
           className="w-full h-60 rounded-xl mt-3 raltive justify-center items-center"
