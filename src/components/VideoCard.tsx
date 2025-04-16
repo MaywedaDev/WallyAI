@@ -18,10 +18,7 @@ type VideoCardProps = {
 };
 
 export default function VideoCard({ video }: VideoCardProps) {
-  const [play, setPlay] = React.useState(false);
-  const player = useVideoPlayer({ uri: video.video }, (player) =>
-    player.pause()
-  );
+  const player = useVideoPlayer(video.video, (player) => player.pause());
   const { isPlaying } = useEvent(player, "playingChange", {
     isPlaying: player.playing,
   });
@@ -66,7 +63,10 @@ export default function VideoCard({ video }: VideoCardProps) {
         <TouchableOpacity
           className="w-full h-60 rounded-xl mt-3 raltive justify-center items-center"
           activeOpacity={0.7}
-          onPress={() => setPlay(true)}
+          onPress={() => {
+            player.loop = true;
+            player.play();
+          }}
         >
           <Image
             source={{ uri: video.thumbnail }}

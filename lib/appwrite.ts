@@ -5,6 +5,7 @@ import {
   Avatars,
   Databases,
   Query,
+  Storage,
 } from "react-native-appwrite";
 
 export const appwriteConfig = {
@@ -28,6 +29,7 @@ client
 const account = new Account(client);
 const avatars = new Avatars(client);
 const databases = new Databases(client);
+const storage = new Storage(client);
 
 export const createUser = async (
   email: string,
@@ -168,5 +170,78 @@ export const signOut = async () => {
     return session;
   } catch (error) {
     console.log("Error signing out:", error);
+  }
+};
+
+export const getFilePreview = async (fileId, type) => {
+  let fileUrl;
+
+  console.log(fileId);
+
+  try {
+    if (type === "video") {
+      fileUrl = storage.getFileView(appwriteConfig.storageID, fileId);
+    } else if (type === "image") {
+      fileUrl = storage.getFilePreview(appwriteConfig.storageID, fileId);
+    } else {
+      throw new Error("Invalid file type");
+    }
+
+    return fileUrl;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+export const uploadFile = async (file, type) => {
+  if (!file) return;
+
+  const { mimeType, ...rest } = file;
+  const asset = { type: mimeType, ...rest };
+
+  try {
+    const uploadedFile = await storage.createFile(
+      appwriteConfig.storageID,
+      ID.unique(),
+      asset
+    );
+
+    console.log(uploadedFile);
+
+    const fileUrl = await getFilePreview(uploadedFile.$id, type);
+
+    if (fileUrl) {
+      throw new Error("No file url");
+    }
+
+    return fileUrl;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const createVideo = async (form) => {
+  try {
+    const [thumbnailUrl, videoUrl] = await Promise.all([
+      uploadFile(form.thumbnail, "image"),
+      uploadFile(form.video, "video"),
+    ]);
+
+    const newPost = await databases.createDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.videosCollectionId,
+      ID.unique(),
+      {
+        title: form.title,
+        thumbnail: thumbnailUrl,
+        video: videoUrl,
+        prompt: form.prompt,
+        creator: form.userId,
+      }
+    );
+
+    return newPost;
+  } catch (err) {
+    console.error(err);
   }
 };

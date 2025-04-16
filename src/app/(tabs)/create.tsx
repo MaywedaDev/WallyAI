@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   Image,
   StyleSheet,
+  Alert,
 } from "react-native";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -12,8 +13,13 @@ import { useVideoPlayer, VideoView } from "expo-video";
 import FormField from "@/components/FormField";
 import { icons, images } from "@/constants";
 import CustomButton from "@/components/CustomButton";
+import * as DocumentPicker from "expo-document-picker";
+import { router } from "expo-router";
+import { createVideo } from "lib/appwrite";
+import { useGlobalContext } from "context/GlobalProvider";
 
 export default function Create() {
+  const { user } = useGlobalContext();
   const [form, setForm] = useState({
     title: "",
     video: null,
@@ -28,9 +34,48 @@ export default function Create() {
     player.loop = true;
   });
 
-  const handleSubmit = () => {};
+  const handleSubmit = async () => {
+    if (!form.prompt || !form.title || !form.thumbnail) {
+      return Alert.alert("Please fill in all the fields");
+    }
 
-  const openPicker = (selectType: string) => {};
+    try {
+      await createVideo({ ...form, userId: user.$id });
+      Alert.alert("Success", "Post Uploaded sucessfully");
+      router.push("/home");
+    } catch (err) {
+    } finally {
+      setForm({
+        title: "",
+        video: null,
+        thumbnail: null,
+        prompt: "",
+      });
+    }
+  };
+
+  const openPicker = async (selectType: string) => {
+    const result = await DocumentPicker.getDocumentAsync({
+      type:
+        selectType === "image"
+          ? ["image/png", "image/jpg", "image/jpeg"]
+          : ["video/mp4", "video/gif"],
+    });
+
+    if (!result.canceled) {
+      if (selectType === "image") {
+        setForm({ ...form, thumbnail: result.assets[0] });
+      }
+
+      if (selectType === "video") {
+        setForm({ ...form, video: result.assets[0] });
+      }
+    } else {
+      setTimeout(() => {
+        Alert.alert("Document Picked", JSON.stringify(result, null, 2));
+      }, 100);
+    }
+  };
   return (
     <SafeAreaView className="bg-primary h-full">
       <ScrollView className="px-4 my-6 ">

@@ -5,7 +5,7 @@ import { StyleSheet, View, Button } from "react-native";
 
 export default function VideoScreen() {
   const [videoSource, setVideoSource] = useState(
-    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+    "https://cloud.appwrite.io/v1/storage/buckets/67f977460021f98c23b1/files/67ffc3990022e02dd933/view?project=67f938e90016c65a8a33"
   );
   const player = useVideoPlayer(videoSource, (player) => {
     player.loop = true;
