@@ -16,7 +16,7 @@
       ]
     },
     "web": {
-      "output": "static"
+      "bundler": "metro"
     },
     "plugins": [
       [
