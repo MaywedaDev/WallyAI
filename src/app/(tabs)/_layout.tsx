@@ -61,14 +61,14 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="bookmarks"
+        name="favorites"
         options={{
-          title: "Bookmarks",
+          title: "Favorites",
           tabBarIcon: ({ color, focused }) => (
             <TabIcon
               icon={icons.bookmark}
               color={color}
-              name="Bookmarks"
+              name="Favorites"
               focused={focused}
             />
           ),
@@ -83,6 +83,20 @@ export default function TabLayout() {
               icon={icons.plus}
               color={color}
               name="Create"
+              focused={focused}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="search"
+        options={{
+          title: "Search",
+          tabBarIcon: ({ color, focused }) => (
+            <TabIcon
+              icon={icons.plus}
+              color={color}
+              name="Search"
               focused={focused}
             />
           ),
