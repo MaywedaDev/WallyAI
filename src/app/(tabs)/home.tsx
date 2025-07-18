@@ -21,5 +21,11 @@ export default function Home() {
     await refresh();
     setRefreshing(false);
   };
-  return <SafeAreaView className="bg-primary flex-1"></SafeAreaView>;
+  return (
+    <SafeAreaView className="bg-primary flex-1">
+      <View className="px-4 mt-6">
+        <Image source={images.logo} resizeMode="contain" className="w-32 h-8" />
+      </View>
+    </SafeAreaView>
+  );
 }
