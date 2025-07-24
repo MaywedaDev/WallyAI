@@ -73,6 +73,7 @@ export default function Home() {
         initialLayout={{ width: layout.width }}
         style={{ backgroundColor: "#161622" }}
         renderTabBar={renderTabBar}
+        color="#161622"
       />
     </SafeAreaView>
   );
