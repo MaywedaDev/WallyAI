@@ -45,9 +45,6 @@ export const createUser = async (
 
     await signIn(email, password);
 
-    // console.log("User created successfully:", newAccount);
-    // console.log("Avatar URL:", avatarUrl);
-
     const newUser = await databases.createDocument(
       appwriteConfig.databaseId,
       appwriteConfig.userCollectionId,
@@ -56,8 +53,6 @@ export const createUser = async (
     );
 
     return newUser;
-
-    // console.log("User document created successfully:", newUser);
   } catch (error) {
     console.log("Error creating user:", error);
   }
