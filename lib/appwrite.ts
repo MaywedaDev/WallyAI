@@ -107,7 +107,6 @@ export const getAllPosts = async () => {
     console.log("Error getting all posts:", error);
     throw new Error("Error getting all posts:", error);
   }
-  return null;
 };
 
 export const searchPosts = async (query: string) => {
@@ -123,7 +122,6 @@ export const searchPosts = async (query: string) => {
     console.log("Error getting search results:", error);
     throw new Error("Error getting search results:", error);
   }
-  return null;
 };
 
 export const getUserPosts = async (userId: string) => {
@@ -139,7 +137,6 @@ export const getUserPosts = async (userId: string) => {
     console.log("Error getting user posts:", error);
     throw new Error("Error getting user posts:", error);
   }
-  return null;
 };
 
 export const getLatestPosts = async () => {
@@ -155,7 +152,6 @@ export const getLatestPosts = async () => {
     console.log("Error getting latest posts:", error);
     throw new Error("Error getting latest posts:", error);
   }
-  return null;
 };
 
 export const signOut = async () => {
