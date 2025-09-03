@@ -5,7 +5,7 @@ import icons from "../../constants/icons";
 
 const TabIcon = ({ icon, color, name, focused }) => {
   return (
-    <View className="flex-1 flex min-h-[42px] items-center justify-center gap-2">
+    <View className="flex-1 flex min-h-[60px] items-center justify-center gap-2">
       <Image
         source={icon}
         resizeMode="contain"
@@ -32,15 +32,15 @@ export default function TabLayout() {
         // tabBarShowLabel: false,
         tabBarIconStyle: {
           display: "flex",
-          height: 42,
-          width: 42,
+          height: 60,
+          width: 60,
         },
         tabBarLabelStyle: { display: "none", height: 0 },
         tabBarActiveTintColor: "#ffa001",
         tabBarInactiveTintColor: "#cdcde0",
         tabBarStyle: {
           backgroundColor: "#161622",
-          height: 72,
+          height: 88,
         },
       }}
     >
