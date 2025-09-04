@@ -63,9 +63,9 @@ export default function Home() {
 
   return (
     <SafeAreaView className="bg-primary flex-1">
-      <View className="px-4 my-6">
+      {/* <View className="px-4 my-6">
         <Image source={images.logo} resizeMode="contain" className="w-32 h-8" />
-      </View>
+      </View> */}
       <TabView
         navigationState={{ index, routes }}
         renderScene={renderScene}
