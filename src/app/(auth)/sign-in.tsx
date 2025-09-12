@@ -54,10 +54,10 @@ export default function SignIn() {
           <Image
             source={images.logo}
             resizeMode="contain"
-            className="w-[115px] h-[35px]"
+            className="w-[240px] h-[240px]"
           />
           <Text className="text-2xl text-white font-psemibold mt-10 text-semibold">
-            Log in to Aora
+            Log in to WallyAI
           </Text>
           <FormField
             title="Email"

@@ -52,10 +52,10 @@ export default function SignUp() {
           <Image
             source={images.logo}
             resizeMode="contain"
-            className="w-[115px] h-[35px]"
+            className="w-[240px] h-[240px]"
           />
           <Text className="text-2xl text-white font-psemibold mt-10 text-semibold">
-            Sign up to Aora
+            Sign up to WallyAI
           </Text>
           <FormField
             title="Username"
