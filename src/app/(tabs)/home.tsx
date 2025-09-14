@@ -1,14 +1,6 @@
 import { View, Text, FlatList, Image, useWindowDimensions } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { images } from "@/constants";
-import SearchInput from "@/components/SearchInput";
-import Trending from "@/components/Trending";
-import EmptyState from "@/components/EmptyState";
-import useAppwrite from "lib/useAppwrite";
-import { getAllPosts, getLatestPosts } from "lib/appwrite";
-import VideoCard from "@/components/VideoCard";
-import VideoScreen from "@/components/VideoExample";
 import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 
 const TempComponent = () => {
@@ -57,7 +49,7 @@ export default function Home() {
 
   const onRefresh = async () => {
     setRefreshing(true);
-    await refresh();
+    // await refresh();
     setRefreshing(false);
   };
 

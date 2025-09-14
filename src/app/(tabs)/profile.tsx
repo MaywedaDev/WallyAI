@@ -6,9 +6,9 @@ import {
   RefreshControl,
   TouchableOpacity,
 } from "react-native";
-import React, { useEffect } from "react";
+import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { icons, images } from "@/constants";
+import { icons } from "@/constants";
 import EmptyState from "@/components/EmptyState";
 import useAppwrite from "lib/useAppwrite";
 import { getUserPosts, signOut } from "lib/appwrite";
