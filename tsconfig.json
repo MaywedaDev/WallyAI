@@ -1,12 +1,14 @@
 {
   "compilerOptions": {
-    "jsx": "react",
+    "jsx": "react-native",
+    "skipLibCheck": true,
     "baseUrl": ".",
     "esModuleInterop": true,
     "paths": {
       "@/*": ["./src/*"]
     }
   },
+  "exclude": ["node_modules"],
   "extends": "expo/tsconfig.base",
   "include": ["global.d.ts", "**/*.ts", "**/*.tsx", "nativewind-env.d.ts"]
 }
