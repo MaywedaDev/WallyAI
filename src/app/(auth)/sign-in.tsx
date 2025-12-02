@@ -79,6 +79,7 @@ export default function SignIn() {
             containerStyles="mt-7"
             isLoading={isSubmitting}
           />
+          {error && <Text>{error}</Text>}
           <View className="flex-row justify-center gap-2 mt-5">
             <Text className="text-lg text-gray-100 font-pregular">
               Don't have an account?

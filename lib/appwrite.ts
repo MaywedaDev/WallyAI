@@ -9,7 +9,7 @@ import {
 } from "react-native-appwrite";
 
 export const appwriteConfig = {
-  endpoint: "https://cloud.appwrite.io/v1", // Your API Endpoint
+  endpoint: "https://fra.cloud.appwrite.io/v1", // Your API Endpoint
   projectId: "67f938e90016c65a8a33", // Your project ID
   platform: "com.mwd.wallyai",
   databaseId: "67f97057001d6efb3403", // Your database ID
@@ -90,6 +90,7 @@ export const getCurrentUser = async () => {
     return currentUser.documents[0];
   } catch (error) {
     console.log("Error getting current user:", error);
+    // console.log('No user');
   }
   return null;
 };

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { getCurrentUser } from "lib/appwrite";
+import { getCurrentUser, signOut } from "lib/appwrite";
 
 type GlobalContextType = {
   isLoggedIn: boolean;
@@ -17,6 +17,8 @@ const GlobalProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+
+  signOut();
 
   useEffect(() => {
     setIsLoading(true);

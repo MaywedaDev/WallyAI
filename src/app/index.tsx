@@ -32,7 +32,7 @@ export default function Home() {
           <View className="relative mt-5">
             <Text className="text-3xl text-white font-psemibold text-center">
               Discover Endless Possibilities with{" "}
-              <Text className="text-secondary-200">Aora</Text>
+              <Text className="text-secondary-200">WallyAI</Text>
             </Text>
             <Image
               source={images.path}
